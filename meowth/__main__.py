@@ -1477,6 +1477,7 @@ async def _list(ctx):
     user_roles = set([r.name for r in author.roles])
     active_roles = user_roles & enabled_roles
     response = f"You have {len(active_roles)} active region roles:\n{', '.join(active_roles)}"
+    response += f" Regions available to join are: {', '.join(set(active_roles).difference(enabled_roles)) or 'N/A'}"
     await message.add_reaction('✅')
     resp = await channel.send(response)
     await asyncio.sleep(15)
