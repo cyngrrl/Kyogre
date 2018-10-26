@@ -1398,7 +1398,7 @@ async def join(ctx, *, region_names: str = ''):
     response = ""
     region_info_dict = guild_dict[guild.id]['configure_dict']['regions']['info']
     enabled_roles = set([r.get('role', None) for r in region_info_dict.values()])
-    requested_roles = set([r for r in re.split(r'\s*,\s*', region_names.lower().strip()) if r])
+    requested_roles = set([r for r in re.split(r'\s*,\s*', region_names.lower().replace(" ", "")) if r])
     if not requested_roles:
         return await channel.send(_user_region_list("join", author, enabled_roles))
     valid_requests = requested_roles & enabled_roles
@@ -1433,7 +1433,7 @@ async def _leave(ctx, *, region_names: str = ''):
     response = ""
     region_info_dict = guild_dict[guild.id]['configure_dict']['regions']['info']
     enabled_roles = set([r.get('role', None) for r in region_info_dict.values()])
-    requested_roles = set([r for r in re.split(r'\s*,\s*', region_names.lower().strip()) if r])
+    requested_roles = set([r for r in re.split(r'\s*,\s*', region_names.lower().replace(" ", "")) if r])
     if not requested_roles:
         return await channel.send(_user_region_list("leave", author, enabled_roles))
     valid_requests = requested_roles & enabled_roles
